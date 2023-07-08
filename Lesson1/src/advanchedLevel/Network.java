@@ -1,35 +1,53 @@
 package advanchedLevel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Network {
-    private String name;
-    private String ID;
+    private String networkName;
+    private static List<String> users = new ArrayList<>() {};
 
-    public Network(String name, String ID) {
-        this.name = name;
-        this.ID = ID;
+    public Network(String networkName) {
+        this.networkName = networkName;
     }
 
-    public Network() {
+    public static List<String> getUsers() {
+        return users;
     }
 
-    public String getName() {
-        return name;
+    public static void setUsers(List<String> users) {
+        Network.users = users;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getNetworkName() {
+        return networkName;
     }
 
-    public String getID() {
-        return ID;
+    public void setNetworkName(String networkName) {
+        this.networkName = networkName;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public static boolean register(String phoneNumber) {
+        if(!users.contains(phoneNumber)) {
+            users.add(phoneNumber);
+            System.out.println(phoneNumber + ": Registration completed");
+            return true;
+        } else {
+            System.out.println("This number has already been added");
+            return false;
+        }
+    }
+
+    public static boolean checkRegistration(String phoneNumber) {
+        if(users.contains(phoneNumber)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public String toString() {
-        return "Network{" + "name='" + name + '\'' + ", ID='" + ID + '\'' + '}';
+        return "Network{" + "networkName='" + networkName + '\'' + '}';
     }
 }
