@@ -1,7 +1,9 @@
 package basicLevel;
 
 public class Triangle {
-    private double sideA, sideB, sideC;
+    private double sideA;
+    private double sideB;
+    private double sideC;
 
     public Triangle(double sideA, double sideB, double sideC) {
         this.sideA = sideA;
@@ -36,17 +38,19 @@ public class Triangle {
         this.sideC = sideC;
     }
 
-    public void getArea() {
+    public double getArea() {
         if(sideA > 0 && sideB > 0 && sideC > 0) {
             if(sideA + sideB > sideC && sideA + sideC > sideB && sideB + sideC > sideA)
             {
                 double p = sideA + sideB + sideC;
-                System.out.printf("Area of your triangle = %f\n", Math.sqrt(p * (p - sideA) * (p - sideB) * (p - sideC)));
+                return Math.sqrt(p * (p - sideA) * (p - sideB) * (p - sideC));
             } else {
                 System.out.println("Triangle don't exist.");
+                return 0;
             }
         } else {
             System.out.println("One side = 0");
+            return 0;
         }
     }
 
