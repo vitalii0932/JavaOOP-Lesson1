@@ -28,43 +28,32 @@ public class Phone {
         this.userName = userName;
     }
 
-    public void register(Network network) {
-        if(this.phoneNumber.length() == 7) { // +38(063)***-**-**; 063 -> networkID
-            this.phoneNumber = network.getID() + this.phoneNumber;
-            System.out.printf("Registration completed. %s, your phone number is %s\n", this.userName, this.phoneNumber);
+    public void register() {
+        if(this.phoneNumber.length() == 10 && this.phoneNumber != null) { // +38(063)***-**-**; 063 -> networkID
+            boolean reg = Network.register(this.phoneNumber);
+        }  else {
+            System.out.println("Phone number error.");
         }
-
-        else
-            System.out.println("Registration error.");
     }
 
     public void call(String callingPhoneNumber) {
-        if(this.phoneNumber != null && this.phoneNumber.length() == 10) { //does user phone exist
-            if(callingPhoneNumber != null && callingPhoneNumber.length() == 10) { //does called phone exist
-                if(this.phoneNumber.substring(0,3).equals("093") || this.phoneNumber.substring(0,3).equals("095") || this.phoneNumber.substring(0,3).equals("097")) {
-                    //does user phone registered
-                    if(this.phoneNumber != callingPhoneNumber) { //does user don't call himself
-                        if(callingPhoneNumber.substring(0,3).equals("093") || callingPhoneNumber.substring(0,3).equals("095") || callingPhoneNumber.substring(0,3).equals("097")) { //does called phone registered
-                            calls(callingPhoneNumber);
-                        } else {
-                            System.out.println("ERROR. Unknown network.");
-                        }
-                    } else {
-                        System.out.println("You can't call yourself");
-                    }
+        if(Network.checkRegistration(this.phoneNumber)) { //does user phone registered
+            if(Network.checkRegistration(callingPhoneNumber)) { //does called phone registered
+                if(this.phoneNumber != callingPhoneNumber) { //does user don't call himself
+                    calls(this.phoneNumber);
                 } else {
-                    System.out.println("Unknown network. Please, register your phone number");
+                    System.out.println("You can't call yourself");
                 }
             } else {
-                System.out.println("The phone number you are calling is not correct");
+                System.out.println("ERROR. Unknown network");
             }
         } else {
-            System.out.println("Please, register your phone number, or input another phone number");
+            System.out.println("Please, register your phone number");
         }
     }
 
     public void calls(String calledPhoneNumber) {
-        System.out.printf("%s calling: call... call... call..\n", calledPhoneNumber);
+        System.out.printf("%s calls you: call... call... call..\n", calledPhoneNumber);
     }
 
     @Override
