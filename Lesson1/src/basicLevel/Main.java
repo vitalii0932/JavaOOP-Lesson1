@@ -22,11 +22,11 @@ public class Main {
         Triangle triangle2 = new Triangle(2, 0.3, 0.2);
         Triangle triangle3 = new Triangle(1, 0, 2);
 
-        triangle1.getArea();
+        System.out.println("Area of your triangle is " + triangle1.getArea());
         System.out.println(triangle1.toString());
-        triangle2.getArea();
+        System.out.println("Area of your triangle is " + triangle2.getArea());
         System.out.println(triangle2.toString());
-        triangle3.getArea();
+        System.out.println("Area of your triangle is " + triangle3.getArea());
         System.out.println(triangle3.toString());
     }
 }
